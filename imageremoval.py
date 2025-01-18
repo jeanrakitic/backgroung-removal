@@ -18,27 +18,23 @@ class ImageProcessor:
         self.setup_ui()
         
     def setup_ui(self):
-        # Main frame
+    
         self.main_frame = ttk.Frame(self.root, padding="10")
         self.main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
-        # Buttons frame
+       
         self.button_frame = ttk.Frame(self.main_frame)
         self.button_frame.grid(row=0, column=0, columnspan=2, pady=5)
         
-        # Load Image Button
         self.load_btn = ttk.Button(self.button_frame, text="Load Image", command=self.load_image)
         self.load_btn.grid(row=0, column=0, padx=5)
         
-        # Remove Background Button
         self.remove_bg_btn = ttk.Button(self.button_frame, text="Remove Background", command=self.remove_background)
         self.remove_bg_btn.grid(row=0, column=1, padx=5)
         
-        # Save Button
         self.save_btn = ttk.Button(self.button_frame, text="Save Image", command=self.save_image)
         self.save_btn.grid(row=0, column=2, padx=5)
         
-        # Threshold slider
         self.threshold_label = ttk.Label(self.main_frame, text="Threshold Value:")
         self.threshold_label.grid(row=1, column=0, pady=5)
         
@@ -47,7 +43,6 @@ class ImageProcessor:
         self.threshold_scale.set(self.current_threshold)
         self.threshold_scale.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5)
         
-        # Image display areas
         self.original_label = ttk.Label(self.main_frame, text="Original Image")
         self.original_label.grid(row=2, column=0)
         
@@ -118,11 +113,10 @@ class ImageProcessor:
         new_height = int(height * scale)
         
         resized = cv2.resize(image_rgb, (new_width, new_height))
-        
-        # Convert to PhotoImage
+      
         photo = ImageTk.PhotoImage(Image.fromarray(resized))
         
-        # Update canvas
+        
         canvas.delete("all")
         canvas.create_image(max_size//2, max_size//2, image=photo, anchor=tk.CENTER)
         canvas.image = photo  # Keep a reference to prevent garbage collection
